@@ -51,24 +51,22 @@ void liquid_level_detection_usecase2() {
 	createTrackbar("canny low", "filters", &canny_low, 255);
 	createTrackbar("canny high", "filters", &canny_high, 255);
 
-	// load image
-	Mat sample_image = imread("C:/lasse/Portfolio/usecase2/usecase2_sample3.jpg");
-
-	// resize
-	if (image_down_scale_factor == 0) {
-		image_down_scale_factor = 1;
-	}
-	int width = sample_image.cols;
-	int height = sample_image.rows;
-	// resize(sample_image, sample_image, Size(width / image_down_scale_factor, height / image_down_scale_factor), INTER_LINEAR);
-	resize(sample_image, sample_image, Size(round(width / image_down_scale_factor), round(height / image_down_scale_factor)), INTER_LINEAR);
-
-	imshow("sample_image", sample_image);     // Display frame
-
-
-
 	while (1) {
-		
+
+		// load image
+		Mat sample_image = imread("C:/lasse/Portfolio/usecase2/usecase2_sample3.jpg");
+
+		// resize
+		if (image_down_scale_factor == 0) {
+			image_down_scale_factor = 1;
+		}
+		int width = sample_image.cols;
+		int height = sample_image.rows;
+		// resize(sample_image, sample_image, Size(width / image_down_scale_factor, height / image_down_scale_factor), INTER_LINEAR);
+		resize(sample_image, sample_image, Size(round(width / image_down_scale_factor), round(height / image_down_scale_factor)), INTER_LINEAR);
+
+		imshow("sample_image", sample_image);     // Display frame
+
 		cout << "Width : " << sample_image.size().width << endl;
 		cout << "Height: " << sample_image.size().height << endl;
 		cout << "Channels: :" << sample_image.channels() << endl;
@@ -136,7 +134,7 @@ void liquid_level_detection_usecase2() {
 
 				putText(cropped_image,
 					"pixel:" + to_string(contourArea(contours[i])),
-					Point(300, 100),
+					Point(0, 100),
 					FONT_HERSHEY_SIMPLEX,
 					0.6,
 					(0, 0, 255),
