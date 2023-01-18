@@ -68,11 +68,6 @@ void liquid_level_detection_usecase2() {
 
 
 	while (1) {
-
-		// frame
-		
-
-		// cropping
 		
 		cout << "Width : " << sample_image.size().width << endl;
 		cout << "Height: " << sample_image.size().height << endl;
@@ -81,33 +76,7 @@ void liquid_level_detection_usecase2() {
 		//Height : 360
 		//Channels : : 3
 
-		//Mat cropped_image = sample_image(Range(0, 240), Range(130, 200));
 		Mat cropped_image = sample_image(Range(0, 360), Range(200, 300));
-		//cropped_image = sample_image;
-
-		/*
-		# load the imageand show it
-			image = cv2.imread(args["image"])
-			cv2.imshow("Original", image)
-			# grab the dimensions of the image and calculate the center of the
-			# image
-			(h, w) = image.shape[:2]
-			(cX, cY) = (w // 2, h // 2)
-				# rotate our image by 45 degrees around the center of the image
-				M = cv2.getRotationMatrix2D((cX, cY), 45, 1.0)
-				rotated = cv2.warpAffine(image, M, (w, h))
-				cv2.imshow("Rotated by 45 Degrees", rotated)
-				# rotate our image by - 90 degrees around the image
-				M = cv2.getRotationMatrix2D((cX, cY), -90, 1.0)
-				rotated = cv2.warpAffine(image, M, (w, h))
-				cv2.imshow("Rotated by -90 Degrees", rotated)
-		*/
-
-
-		//imshow("rotated_image", cropped_rotated);
-
-		//histogram original frame
-		//Histogram_color_LS(frame);
 
 		// BGR mask
 		Scalar BGR_lower(Blue_min, Green_min, Red_min);
@@ -156,32 +125,6 @@ void liquid_level_detection_usecase2() {
 		imshow("eroded", eroded);
 
 
-		// line detection
-		
-		vector<Vec4i> lines;
-		Mat src, dst, color_dst;
-		//cvtColor(sample_image, color_dst, COLOR_GRAY2BGR);
-
-		//Canny(src, dst, 50, 200, 3);
-		cvtColor(eroded, color_dst, COLOR_GRAY2BGR);
-
-		//HoughLinesP(sample_image, lines, 1, CV_PI / 180, 80, 30, 10);
-		HoughLinesP(eroded, lines, 1, CV_PI / 180, 80, 30, 10);
-		for (size_t i = 0; i < lines.size(); i++)
-		{
-			line(color_dst, Point(lines[i][0], lines[i][1]),
-				Point(lines[i][2], lines[i][3]), Scalar(0, 0, 255), 3, 8);
-		}
-		//cout << "test" << endl;
-		//namedWindow("Source", 1);
-		//imshow("Source", src);
-		//namedWindow("Detected Lines", 1);
-		// imshow("Detected Lines", color_dst);
-
-		// blob detector
-		// Blob_detector(eroded);
-
-
 		// contours
 		vector<vector<Point>>contours;
 		vector<Vec4i>hierarchy;
@@ -207,18 +150,10 @@ void liquid_level_detection_usecase2() {
 		}
 		imshow("contours", cropped_image);
 
-
-
-		// liquid level
-		
-
-	
 		waitKey(1);
 
 		char c = (char)waitKey(25);
-		if (c == 109) {            // match shapes, if user press m
-			// matchContoursFull_LS(eroded, image_template);
-			// matchContoursFull_usecase1(frame_eroded, image_template_eroded);
+		if (c == 109) {            //if user press m
 		}
 
 		c = (char)waitKey(25);
